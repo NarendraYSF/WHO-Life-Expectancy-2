@@ -1072,6 +1072,20 @@ def main():
     # Sidebar
     st.sidebar.markdown('<h2 class="sidebar-header">Navigasi</h2>', unsafe_allow_html=True)
     
+    # Language chooser
+    st.sidebar.markdown("### 🌐 Bahasa / Language")
+    language_choice = st.sidebar.selectbox(
+        "Pilih Bahasa / Choose Language:",
+        ["🇮🇩 Indonesia", "🇺🇸 English"]
+    )
+    
+    # Add link to English version if selected
+    if language_choice == "🇺🇸 English":
+        st.sidebar.markdown("---")
+        st.sidebar.markdown("**English Version:**")
+        st.sidebar.markdown("[Open English App](https://life-expectancy-linear-regression-app.streamlit.app/)")
+        st.sidebar.markdown("---")
+    
     page = st.sidebar.selectbox(
         "Pilih halaman:",
         ["🏠 Beranda", "📈 Analisis Data", "🌍 Visualisasi Peta", "🔍 Deteksi Outlier", "📋 Detail Outlier", "🤖 Pelatihan Model", "📊 Hasil", "🔮 Prediksi", "📋 Tentang"]

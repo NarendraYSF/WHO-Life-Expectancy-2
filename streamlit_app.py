@@ -1073,6 +1073,20 @@ def main():
     # Sidebar
     st.sidebar.markdown('<h2 class="sidebar-header">Navigation</h2>', unsafe_allow_html=True)
     
+    # Language chooser
+    st.sidebar.markdown("### 🌐 Language / Bahasa")
+    language_choice = st.sidebar.selectbox(
+        "Choose Language / Pilih Bahasa:",
+        ["🇺🇸 English", "🇮🇩 Indonesia"]
+    )
+    
+    # Add link to Indonesian version if selected
+    if language_choice == "🇮🇩 Indonesia":
+        st.sidebar.markdown("---")
+        st.sidebar.markdown("**Indonesian Version:**")
+        st.sidebar.markdown("[Open Indonesian App](https://who-life-expectancy-id.streamlit.app/)")
+        st.sidebar.markdown("---")
+
     page = st.sidebar.selectbox(
         "Choose a page:",
         ["🏠 Home", "📈 Data Analysis", "🌍 Map Visualization", "🔍 Outlier Detection", "📋 Outlier Details", "🤖 Model Training", "📊 Results", "🔮 Predictions", "📋 About"]
