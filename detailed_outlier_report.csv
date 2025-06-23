@@ -1,0 +1,350 @@
+Method,Country,Year,Status,Region,Life_Expectancy,Outlier_Score,Original_Index
+zscore,Haiti,2010,Developing,Latin America,36.3,3.4576872896992716,1125
+zscore,Sierra Leone,2000,Developing,Africa,39.0,3.1741405911379372,2303
+iqr,Haiti,2010,Developing,Latin America,36.3,2.841269841269841,1125
+iqr,Malawi,2002,Developing,Africa,44.0,2.2301587301587293,1581
+iqr,Malawi,2001,Developing,Africa,43.5,2.2698412698412693,1582
+iqr,Malawi,2000,Developing,Africa,43.1,2.301587301587301,1583
+iqr,Sierra Leone,2005,Developing,Africa,43.3,2.285714285714285,2298
+iqr,Sierra Leone,2004,Developing,Africa,42.3,2.3650793650793647,2299
+iqr,Sierra Leone,2003,Developing,Africa,41.5,2.428571428571428,2300
+iqr,Sierra Leone,2001,Developing,Africa,41.0,2.4682539682539675,2302
+iqr,Sierra Leone,2000,Developing,Africa,39.0,2.626984126984126,2303
+iqr,Zambia,2000,Developing,Africa,43.8,2.2460317460317456,2911
+modified_zscore,Angola,2001,Developing,Africa,45.7,3.0701379310344836,62
+modified_zscore,Angola,2000,Developing,Africa,45.3,3.1166551724137945,63
+modified_zscore,Botswana,2002,Developing,Africa,46.0,3.035250000000001,349
+modified_zscore,Central African Republic,2006,Developing,Africa,46.3,3.000362068965518,521
+modified_zscore,Central African Republic,2005,Developing,Africa,45.9,3.0468793103448286,522
+modified_zscore,Angola,2001,Developing,Africa,45.7,3.0701379310344836,62
+modified_zscore,Angola,2001,Developing,Africa,45.7,3.0701379310344836,62
+modified_zscore,Central African Republic,2002,Developing,Africa,45.6,3.0817672413793114,525
+modified_zscore,Central African Republic,2002,Developing,Africa,45.6,3.0817672413793114,525
+modified_zscore,Botswana,2002,Developing,Africa,46.0,3.035250000000001,349
+modified_zscore,Angola,2000,Developing,Africa,45.3,3.1166551724137945,63
+modified_zscore,Haiti,2010,Developing,Latin America,36.3,4.163293103448278,1125
+modified_zscore,Lesotho,2007,Developing,Africa,46.2,3.0119913793103454,1480
+modified_zscore,Angola,2000,Developing,Africa,45.3,3.1166551724137945,63
+modified_zscore,Lesotho,2005,Developing,Africa,44.5,3.2096896551724146,1482
+modified_zscore,Lesotho,2004,Developing,Africa,44.8,3.174801724137932,1483
+modified_zscore,Lesotho,2003,Developing,Africa,45.5,3.093396551724139,1484
+modified_zscore,Botswana,2002,Developing,Africa,46.0,3.035250000000001,349
+modified_zscore,Malawi,2004,Developing,Africa,45.1,3.1399137931034486,1579
+modified_zscore,Malawi,2003,Developing,Africa,44.6,3.198060344827587,1580
+modified_zscore,Malawi,2002,Developing,Africa,44.0,3.2678362068965527,1581
+modified_zscore,Malawi,2001,Developing,Africa,43.5,3.325982758620691,1582
+modified_zscore,Malawi,2000,Developing,Africa,43.1,3.3725000000000005,1583
+modified_zscore,Lesotho,2007,Developing,Africa,46.2,3.0119913793103454,1480
+modified_zscore,Angola,2000,Developing,Africa,45.3,3.1166551724137945,63
+modified_zscore,Sierra Leone,2006,Developing,Africa,44.3,3.23294827586207,2297
+modified_zscore,Sierra Leone,2005,Developing,Africa,43.3,3.3492413793103464,2298
+modified_zscore,Sierra Leone,2004,Developing,Africa,42.3,3.465534482758622,2299
+modified_zscore,Sierra Leone,2003,Developing,Africa,41.5,3.5585689655172423,2300
+modified_zscore,Sierra Leone,2001,Developing,Africa,41.0,3.61671551724138,2302
+modified_zscore,Sierra Leone,2000,Developing,Africa,39.0,3.849301724137932,2303
+modified_zscore,Botswana,2002,Developing,Africa,46.0,3.035250000000001,349
+modified_zscore,Central African Republic,2002,Developing,Africa,45.6,3.0817672413793114,525
+modified_zscore,Central African Republic,2005,Developing,Africa,45.9,3.0468793103448286,522
+modified_zscore,Lesotho,2003,Developing,Africa,45.5,3.093396551724139,1484
+modified_zscore,Malawi,2003,Developing,Africa,44.6,3.198060344827587,1580
+modified_zscore,Zambia,2000,Developing,Africa,43.8,3.291094827586208,2911
+modified_zscore,Zimbabwe,2006,Developing,Africa,45.4,3.105025862068967,2921
+modified_zscore,Malawi,2003,Developing,Africa,44.6,3.198060344827587,1580
+modified_zscore,Sierra Leone,2006,Developing,Africa,44.3,3.23294827586207,2297
+modified_zscore,Lesotho,2005,Developing,Africa,44.5,3.2096896551724146,1482
+modified_zscore,Lesotho,2004,Developing,Africa,44.8,3.174801724137932,1483
+modified_zscore,Angola,2000,Developing,Africa,45.3,3.1166551724137945,63
+modified_zscore,Botswana,2002,Developing,Africa,46.0,3.035250000000001,349
+isolation_forest,Angola,2014,Developing,Africa,51.7,0.5517987399092242,49
+isolation_forest,Angola,2013,Developing,Africa,51.1,0.568744198653287,50
+isolation_forest,Angola,2011,Developing,Africa,51.0,0.5699459133400632,52
+isolation_forest,Angola,2010,Developing,Africa,49.6,0.5892437103290515,53
+isolation_forest,Angola,2009,Developing,Africa,49.1,0.600565287759959,54
+isolation_forest,Angola,2008,Developing,Africa,48.7,0.6035375127799812,55
+isolation_forest,Angola,2007,Developing,Africa,48.2,0.5950671215285231,56
+isolation_forest,Angola,2006,Developing,Africa,47.7,0.607015123467905,57
+isolation_forest,Angola,2005,Developing,Africa,47.4,0.6157625079100406,58
+isolation_forest,Angola,2004,Developing,Africa,47.1,0.6267297171959468,59
+isolation_forest,Angola,2003,Developing,Africa,46.8,0.6325586480188635,60
+isolation_forest,Angola,2002,Developing,Africa,46.5,0.6444215934439824,61
+isolation_forest,Angola,2001,Developing,Africa,45.7,0.6573284892250468,62
+isolation_forest,Angola,2000,Developing,Africa,45.3,0.666190246134001,63
+isolation_forest,Australia,2015,Developed,Oceania,82.8,0.5652770438695893,112
+isolation_forest,Australia,2014,Developed,Oceania,82.7,0.557607581350395,113
+isolation_forest,Australia,2013,Developed,Oceania,82.5,0.546563014723513,114
+isolation_forest,Australia,2012,Developed,Oceania,82.3,0.5404798118850063,115
+isolation_forest,Australia,2004,Developed,Oceania,86.0,0.6682482639103502,123
+isolation_forest,Australia,2003,Developed,Oceania,83.0,0.573673325002415,124
+isolation_forest,Austria,2012,Developed,Europe,88.0,0.7150835464557883,131
+isolation_forest,Austria,2012,Developed,Europe,88.0,0.7150835464557883,131
+isolation_forest,Austria,2010,Developed,Europe,84.0,0.62156846478191,133
+isolation_forest,Austria,2010,Developed,Europe,84.0,0.62156846478191,133
+isolation_forest,Belgium,2014,Developed,Europe,89.0,0.735064946230705,241
+isolation_forest,Belgium,2013,Developed,Europe,87.0,0.6894187006099513,242
+isolation_forest,Australia,2003,Developed,Oceania,83.0,0.573673325002415,124
+isolation_forest,Australia,2003,Developed,Oceania,83.0,0.573673325002415,124
+isolation_forest,Angola,2014,Developing,Africa,51.7,0.5517987399092242,49
+isolation_forest,Botswana,2004,Developing,Africa,48.1,0.5941682355307195,347
+isolation_forest,Botswana,2003,Developing,Africa,46.4,0.6452941973652258,348
+isolation_forest,Botswana,2002,Developing,Africa,46.0,0.645196208979346,349
+isolation_forest,Botswana,2001,Developing,Africa,46.7,0.6364120342482605,350
+isolation_forest,Botswana,2000,Developing,Africa,47.8,0.601529504130004,351
+isolation_forest,Burkina Faso,2003,Developing,Africa,51.6,0.5538426533340467,412
+isolation_forest,Angola,2011,Developing,Africa,51.0,0.5699459133400632,52
+isolation_forest,Angola,2011,Developing,Africa,51.0,0.5699459133400632,52
+isolation_forest,Burundi,2002,Developing,Africa,51.5,0.5522128641916901,429
+isolation_forest,Burundi,2001,Developing,Africa,51.3,0.5569901205135583,430
+isolation_forest,Angola,2014,Developing,Africa,51.7,0.5517987399092242,49
+isolation_forest,Burundi,2002,Developing,Africa,51.5,0.5522128641916901,429
+isolation_forest,Angola,2011,Developing,Africa,51.0,0.5699459133400632,52
+isolation_forest,Ivory Coast,2007,Developing,Africa,49.9,0.5873931584722244,440
+isolation_forest,Ivory Coast,2006,Developing,Africa,49.4,0.5944687692357502,441
+isolation_forest,Angola,2008,Developing,Africa,48.7,0.6035375127799812,55
+isolation_forest,Angola,2007,Developing,Africa,48.2,0.5950671215285231,56
+isolation_forest,Ivory Coast,2003,Developing,Africa,48.0,0.5957784378176242,444
+isolation_forest,Angola,2006,Developing,Africa,47.7,0.607015123467905,57
+isolation_forest,Botswana,2000,Developing,Africa,47.8,0.601529504130004,351
+isolation_forest,Ivory Coast,2000,Developing,Africa,47.9,0.5991565923420222,447
+isolation_forest,Cameroon,2003,Developing,Africa,51.8,0.5461895813814179,492
+isolation_forest,Burkina Faso,2003,Developing,Africa,51.6,0.5538426533340467,412
+isolation_forest,Burundi,2002,Developing,Africa,51.5,0.5522128641916901,429
+isolation_forest,Cameroon,2000,Developing,Africa,51.4,0.5555087598945473,495
+isolation_forest,Belgium,2013,Developed,Europe,87.0,0.6894187006099513,242
+isolation_forest,Canada,2007,Developing,North America,85.0,0.6538641876917847,504
+isolation_forest,Canada,2007,Developing,North America,85.0,0.6538641876917847,504
+isolation_forest,Ivory Coast,2007,Developing,Africa,49.9,0.5873931584722244,440
+isolation_forest,Central African Republic,2011,Developing,Africa,49.8,0.5911654373658669,516
+isolation_forest,Central African Republic,2010,Developing,Africa,49.2,0.5936648943811339,517
+isolation_forest,Central African Republic,2009,Developing,Africa,48.6,0.6001111386406593,518
+isolation_forest,Central African Republic,2008,Developing,Africa,47.6,0.6075111998420908,519
+isolation_forest,Angola,2003,Developing,Africa,46.8,0.6325586480188635,60
+isolation_forest,Central African Republic,2006,Developing,Africa,46.3,0.6444215934439824,521
+isolation_forest,Central African Republic,2005,Developing,Africa,45.9,0.6491369733349619,522
+isolation_forest,Angola,2001,Developing,Africa,45.7,0.6573284892250468,62
+isolation_forest,Angola,2001,Developing,Africa,45.7,0.6573284892250468,62
+isolation_forest,Central African Republic,2002,Developing,Africa,45.6,0.6586640625934541,525
+isolation_forest,Central African Republic,2002,Developing,Africa,45.6,0.6586640625934541,525
+isolation_forest,Botswana,2002,Developing,Africa,46.0,0.645196208979346,349
+isolation_forest,Cameroon,2003,Developing,Africa,51.8,0.5461895813814179,492
+isolation_forest,Burkina Faso,2003,Developing,Africa,51.6,0.5538426533340467,412
+isolation_forest,Chad,2010,Developing,Africa,51.2,0.5644478528581568,533
+isolation_forest,Angola,2010,Developing,Africa,49.6,0.5892437103290515,53
+isolation_forest,Ivory Coast,2006,Developing,Africa,49.4,0.5944687692357502,441
+isolation_forest,Chad,2006,Developing,Africa,48.5,0.5960645734910014,537
+isolation_forest,Central African Republic,2009,Developing,Africa,48.6,0.6001111386406593,518
+isolation_forest,Chad,2006,Developing,Africa,48.5,0.5960645734910014,537
+isolation_forest,Chad,2003,Developing,Africa,48.4,0.5941790571870412,540
+isolation_forest,Botswana,2004,Developing,Africa,48.1,0.5941682355307195,347
+isolation_forest,Ivory Coast,2003,Developing,Africa,48.0,0.5957784378176242,444
+isolation_forest,Central African Republic,2008,Developing,Africa,47.6,0.6075111998420908,519
+isolation_forest,Canada,2007,Developing,North America,85.0,0.6538641876917847,504
+isolation_forest,Australia,2003,Developed,Oceania,83.0,0.573673325002415,124
+isolation_forest,Canada,2007,Developing,North America,85.0,0.6538641876917847,504
+isolation_forest,Australia,2003,Developed,Oceania,83.0,0.573673325002415,124
+isolation_forest,Democratic Republic of the Congo,2007,Developing,Africa,55.7,0.5397066692337499,728
+isolation_forest,Cameroon,2003,Developing,Africa,51.8,0.5461895813814179,492
+isolation_forest,Burundi,2001,Developing,Africa,51.3,0.5569901205135583,430
+isolation_forest,Australia,2004,Developed,Oceania,86.0,0.6682482639103502,123
+isolation_forest,Austria,2010,Developed,Europe,84.0,0.62156846478191,133
+isolation_forest,Democratic Republic of the Congo,2007,Developing,Africa,55.7,0.5397066692337499,728
+isolation_forest,Angola,2000,Developing,Africa,45.3,0.666190246134001,63
+isolation_forest,Chad,2010,Developing,Africa,51.2,0.5644478528581568,533
+isolation_forest,Belgium,2014,Developed,Europe,89.0,0.735064946230705,241
+isolation_forest,Belgium,2013,Developed,Europe,87.0,0.6894187006099513,242
+isolation_forest,Austria,2010,Developed,Europe,84.0,0.62156846478191,133
+isolation_forest,Australia,2003,Developed,Oceania,83.0,0.573673325002415,124
+isolation_forest,France,2015,Developing,Europe,82.4,0.5439270437064664,928
+isolation_forest,Belgium,2014,Developed,Europe,89.0,0.735064946230705,241
+isolation_forest,Belgium,2014,Developed,Europe,89.0,0.735064946230705,241
+isolation_forest,Australia,2004,Developed,Oceania,86.0,0.6682482639103502,123
+isolation_forest,Belgium,2014,Developed,Europe,89.0,0.735064946230705,241
+isolation_forest,Australia,2004,Developed,Oceania,86.0,0.6682482639103502,123
+isolation_forest,Australia,2004,Developed,Oceania,86.0,0.6682482639103502,123
+isolation_forest,Canada,2007,Developing,North America,85.0,0.6538641876917847,504
+isolation_forest,Austria,2012,Developed,Europe,88.0,0.7150835464557883,131
+isolation_forest,Australia,2004,Developed,Oceania,86.0,0.6682482639103502,123
+isolation_forest,Austria,2010,Developed,Europe,84.0,0.62156846478191,133
+isolation_forest,Canada,2007,Developing,North America,85.0,0.6538641876917847,504
+isolation_forest,Australia,2003,Developed,Oceania,83.0,0.573673325002415,124
+isolation_forest,Haiti,2010,Developing,Latin America,36.3,0.7684864135085253,1125
+isolation_forest,Australia,2014,Developed,Oceania,82.7,0.557607581350395,113
+isolation_forest,Australia,2013,Developed,Oceania,82.5,0.546563014723513,114
+isolation_forest,France,2015,Developing,Europe,82.4,0.5439270437064664,928
+isolation_forest,Australia,2013,Developed,Oceania,82.5,0.546563014723513,114
+isolation_forest,Austria,2012,Developed,Europe,88.0,0.7150835464557883,131
+isolation_forest,Belgium,2013,Developed,Europe,87.0,0.6894187006099513,242
+isolation_forest,Austria,2010,Developed,Europe,84.0,0.62156846478191,133
+isolation_forest,Canada,2007,Developing,North America,85.0,0.6538641876917847,504
+isolation_forest,Austria,2010,Developed,Europe,84.0,0.62156846478191,133
+isolation_forest,Australia,2004,Developed,Oceania,86.0,0.6682482639103502,123
+isolation_forest,Australia,2013,Developed,Oceania,82.5,0.546563014723513,114
+isolation_forest,Austria,2010,Developed,Europe,84.0,0.62156846478191,133
+isolation_forest,Austria,2010,Developed,Europe,84.0,0.62156846478191,133
+isolation_forest,Australia,2014,Developed,Oceania,82.7,0.557607581350395,113
+isolation_forest,Australia,2013,Developed,Oceania,82.5,0.546563014723513,114
+isolation_forest,Australia,2012,Developed,Oceania,82.3,0.5404798118850063,115
+isolation_forest,Austria,2012,Developed,Europe,88.0,0.7150835464557883,131
+isolation_forest,Belgium,2014,Developed,Europe,89.0,0.735064946230705,241
+isolation_forest,Japan,2015,Developed,East Asia,83.7,0.6148668504202601,1312
+isolation_forest,Japan,2014,Developed,East Asia,83.5,0.6033363643936007,1313
+isolation_forest,Japan,2014,Developed,East Asia,83.5,0.6033363643936007,1313
+isolation_forest,Japan,2012,Developed,East Asia,83.3,0.5952145033283172,1315
+isolation_forest,Australia,2013,Developed,Oceania,82.5,0.546563014723513,114
+isolation_forest,Australia,2003,Developed,Oceania,83.0,0.573673325002415,124
+isolation_forest,Australia,2003,Developed,Oceania,83.0,0.573673325002415,124
+isolation_forest,Australia,2014,Developed,Oceania,82.7,0.557607581350395,113
+isolation_forest,Japan,2007,Developed,East Asia,82.6,0.5550700376113914,1320
+isolation_forest,France,2015,Developing,Europe,82.4,0.5439270437064664,928
+isolation_forest,Angola,2013,Developing,Africa,51.1,0.568744198653287,50
+isolation_forest,Ivory Coast,2006,Developing,Africa,49.4,0.5944687692357502,441
+isolation_forest,Botswana,2000,Developing,Africa,47.8,0.601529504130004,351
+isolation_forest,Lesotho,2007,Developing,Africa,46.2,0.6436404780512593,1480
+isolation_forest,Angola,2000,Developing,Africa,45.3,0.666190246134001,63
+isolation_forest,Lesotho,2005,Developing,Africa,44.5,0.6964810937848038,1482
+isolation_forest,Lesotho,2004,Developing,Africa,44.8,0.6867241637429004,1483
+isolation_forest,Lesotho,2003,Developing,Africa,45.5,0.6626870866349307,1484
+isolation_forest,Botswana,2003,Developing,Africa,46.4,0.6452941973652258,348
+isolation_forest,Botswana,2000,Developing,Africa,47.8,0.601529504130004,351
+isolation_forest,Lesotho,2000,Developing,Africa,49.3,0.5944687692357502,1487
+isolation_forest,Liberia,2003,Developing,Africa,50.0,0.5850134589211975,1500
+isolation_forest,Burundi,2002,Developing,Africa,51.5,0.5522128641916901,429
+isolation_forest,Austria,2012,Developed,Europe,88.0,0.7150835464557883,131
+isolation_forest,Australia,2004,Developed,Oceania,86.0,0.6682482639103502,123
+isolation_forest,Australia,2003,Developed,Oceania,83.0,0.573673325002415,124
+isolation_forest,Burundi,2002,Developing,Africa,51.5,0.5522128641916901,429
+isolation_forest,Liberia,2003,Developing,Africa,50.0,0.5850134589211975,1500
+isolation_forest,Chad,2006,Developing,Africa,48.5,0.5960645734910014,537
+isolation_forest,Angola,2004,Developing,Africa,47.1,0.6267297171959468,59
+isolation_forest,Botswana,2002,Developing,Africa,46.0,0.645196208979346,349
+isolation_forest,Malawi,2004,Developing,Africa,45.1,0.6742930931593969,1579
+isolation_forest,Malawi,2003,Developing,Africa,44.6,0.6960100235858379,1580
+isolation_forest,Malawi,2002,Developing,Africa,44.0,0.7136536464156861,1581
+isolation_forest,Malawi,2001,Developing,Africa,43.5,0.7245276482940095,1582
+isolation_forest,Malawi,2000,Developing,Africa,43.1,0.7314231313477553,1583
+isolation_forest,Chad,2010,Developing,Africa,51.2,0.5644478528581568,533
+isolation_forest,Central African Republic,2011,Developing,Africa,49.8,0.5911654373658669,516
+isolation_forest,Belgium,2013,Developed,Europe,87.0,0.6894187006099513,242
+isolation_forest,Australia,2003,Developed,Oceania,83.0,0.573673325002415,124
+isolation_forest,Chad,2010,Developing,Africa,51.2,0.5644478528581568,533
+isolation_forest,Angola,2011,Developing,Africa,51.0,0.5699459133400632,52
+isolation_forest,Central African Republic,2011,Developing,Africa,49.8,0.5911654373658669,516
+isolation_forest,Mozambique,2001,Developing,Africa,49.5,0.5912834082523611,1774
+isolation_forest,Mozambique,2000,Developing,Africa,49.0,0.6001590909340556,1775
+isolation_forest,Democratic Republic of the Congo,2007,Developing,Africa,55.7,0.5397066692337499,728
+isolation_forest,Austria,2012,Developed,Europe,88.0,0.7150835464557883,131
+isolation_forest,Australia,2004,Developed,Oceania,86.0,0.6682482639103502,123
+isolation_forest,Australia,2003,Developed,Oceania,83.0,0.573673325002415,124
+isolation_forest,Australia,2004,Developed,Oceania,86.0,0.6682482639103502,123
+isolation_forest,Belgium,2014,Developed,Europe,89.0,0.735064946230705,241
+isolation_forest,Canada,2007,Developing,North America,85.0,0.6538641876917847,504
+isolation_forest,Cameroon,2000,Developing,Africa,51.4,0.5555087598945473,495
+isolation_forest,Liberia,2003,Developing,Africa,50.0,0.5850134589211975,1500
+isolation_forest,Burkina Faso,2003,Developing,Africa,51.6,0.5538426533340467,412
+isolation_forest,Central African Republic,2011,Developing,Africa,49.8,0.5911654373658669,516
+isolation_forest,Central African Republic,2010,Developing,Africa,49.2,0.5936648943811339,517
+isolation_forest,Chad,2006,Developing,Africa,48.5,0.5960645734910014,537
+isolation_forest,Botswana,2004,Developing,Africa,48.1,0.5941682355307195,347
+isolation_forest,Angola,2006,Developing,Africa,47.7,0.607015123467905,57
+isolation_forest,Angola,2005,Developing,Africa,47.4,0.6157625079100406,58
+isolation_forest,Angola,2004,Developing,Africa,47.1,0.6267297171959468,59
+isolation_forest,Belgium,2014,Developed,Europe,89.0,0.735064946230705,241
+isolation_forest,Australia,2004,Developed,Oceania,86.0,0.6682482639103502,123
+isolation_forest,Canada,2007,Developing,North America,85.0,0.6538641876917847,504
+isolation_forest,Austria,2010,Developed,Europe,84.0,0.62156846478191,133
+isolation_forest,Belgium,2014,Developed,Europe,89.0,0.735064946230705,241
+isolation_forest,Australia,2004,Developed,Oceania,86.0,0.6682482639103502,123
+isolation_forest,Australia,2003,Developed,Oceania,83.0,0.573673325002415,124
+isolation_forest,Australia,2012,Developed,Oceania,82.3,0.5404798118850063,115
+isolation_forest,Belgium,2013,Developed,Europe,87.0,0.6894187006099513,242
+isolation_forest,Australia,2004,Developed,Oceania,86.0,0.6682482639103502,123
+isolation_forest,Australia,2003,Developed,Oceania,83.0,0.573673325002415,124
+isolation_forest,Central African Republic,2009,Developing,Africa,48.6,0.6001111386406593,518
+isolation_forest,Rwanda,2000,Developing,Africa,48.3,0.594095688525568,2159
+isolation_forest,Angola,2011,Developing,Africa,51.0,0.5699459133400632,52
+isolation_forest,Botswana,2004,Developing,Africa,48.1,0.5941682355307195,347
+isolation_forest,Sierra Leone,2012,Developing,Africa,49.7,0.590475291185821,2291
+isolation_forest,Sierra Leone,2011,Developing,Africa,48.9,0.6030687740744649,2292
+isolation_forest,Botswana,2004,Developing,Africa,48.1,0.5941682355307195,347
+isolation_forest,Angola,2004,Developing,Africa,47.1,0.6267297171959468,59
+isolation_forest,Lesotho,2007,Developing,Africa,46.2,0.6436404780512593,1480
+isolation_forest,Angola,2000,Developing,Africa,45.3,0.666190246134001,63
+isolation_forest,Sierra Leone,2006,Developing,Africa,44.3,0.7007350987379473,2297
+isolation_forest,Sierra Leone,2005,Developing,Africa,43.3,0.7299400243881637,2298
+isolation_forest,Sierra Leone,2004,Developing,Africa,42.3,0.7398845042625465,2299
+isolation_forest,Sierra Leone,2003,Developing,Africa,41.5,0.7540649212584722,2300
+isolation_forest,Ivory Coast,2003,Developing,Africa,48.0,0.5957784378176242,444
+isolation_forest,Sierra Leone,2001,Developing,Africa,41.0,0.7596979470827725,2302
+isolation_forest,Sierra Leone,2000,Developing,Africa,39.0,0.7612415167937912,2303
+isolation_forest,Singapore,2015,Developed,Southeast Asia,83.1,0.5825054035799211,2304
+isolation_forest,Singapore,2014,Developed,Southeast Asia,82.9,0.5719537822048608,2305
+isolation_forest,Australia,2014,Developed,Oceania,82.7,0.557607581350395,113
+isolation_forest,Australia,2013,Developed,Oceania,82.5,0.546563014723513,114
+isolation_forest,Belgium,2013,Developed,Europe,87.0,0.6894187006099513,242
+isolation_forest,Austria,2012,Developed,Europe,88.0,0.7150835464557883,131
+isolation_forest,Belgium,2013,Developed,Europe,87.0,0.6894187006099513,242
+isolation_forest,Canada,2007,Developing,North America,85.0,0.6538641876917847,504
+isolation_forest,Burundi,2002,Developing,Africa,51.5,0.5522128641916901,429
+isolation_forest,Burundi,2002,Developing,Africa,51.5,0.5522128641916901,429
+isolation_forest,Burkina Faso,2003,Developing,Africa,51.6,0.5538426533340467,412
+isolation_forest,Chad,2010,Developing,Africa,51.2,0.5644478528581568,533
+isolation_forest,Angola,2013,Developing,Africa,51.1,0.568744198653287,50
+isolation_forest,Cameroon,2000,Developing,Africa,51.4,0.5555087598945473,495
+isolation_forest,Angola,2010,Developing,Africa,49.6,0.5892437103290515,53
+isolation_forest,Sierra Leone,2011,Developing,Africa,48.9,0.6030687740744649,2292
+isolation_forest,Australia,2015,Developed,Oceania,82.8,0.5652770438695893,112
+isolation_forest,Japan,2007,Developed,East Asia,82.6,0.5550700376113914,1320
+isolation_forest,France,2015,Developing,Europe,82.4,0.5439270437064664,928
+isolation_forest,Belgium,2014,Developed,Europe,89.0,0.735064946230705,241
+isolation_forest,Austria,2012,Developed,Europe,88.0,0.7150835464557883,131
+isolation_forest,Cameroon,2000,Developing,Africa,51.4,0.5555087598945473,495
+isolation_forest,Liberia,2003,Developing,Africa,50.0,0.5850134589211975,1500
+isolation_forest,Botswana,2000,Developing,Africa,47.8,0.601529504130004,351
+isolation_forest,Botswana,2002,Developing,Africa,46.0,0.645196208979346,349
+isolation_forest,Central African Republic,2002,Developing,Africa,45.6,0.6586640625934541,525
+isolation_forest,Central African Republic,2005,Developing,Africa,45.9,0.6491369733349619,522
+isolation_forest,Botswana,2003,Developing,Africa,46.4,0.6452941973652258,348
+isolation_forest,Angola,2004,Developing,Africa,47.1,0.6267297171959468,59
+isolation_forest,Chad,2003,Developing,Africa,48.4,0.5941790571870412,540
+isolation_forest,France,2015,Developing,Europe,82.4,0.5439270437064664,928
+isolation_forest,Australia,2012,Developed,Oceania,82.3,0.5404798118850063,115
+isolation_forest,Belgium,2014,Developed,Europe,89.0,0.735064946230705,241
+isolation_forest,Austria,2012,Developed,Europe,88.0,0.7150835464557883,131
+isolation_forest,Canada,2007,Developing,North America,85.0,0.6538641876917847,504
+isolation_forest,Australia,2003,Developed,Oceania,83.0,0.573673325002415,124
+isolation_forest,Switzerland,2015,Developed,Europe,83.4,0.5995405216973155,2512
+isolation_forest,Switzerland,2014,Developed,Europe,83.2,0.5912009563190164,2513
+isolation_forest,Australia,2003,Developed,Oceania,83.0,0.573673325002415,124
+isolation_forest,Australia,2014,Developed,Oceania,82.7,0.557607581350395,113
+isolation_forest,Japan,2007,Developed,East Asia,82.6,0.5550700376113914,1320
+isolation_forest,Australia,2012,Developed,Oceania,82.3,0.5404798118850063,115
+isolation_forest,Canada,2007,Developing,North America,85.0,0.6538641876917847,504
+isolation_forest,Austria,2010,Developed,Europe,84.0,0.62156846478191,133
+isolation_forest,Democratic Republic of the Congo,2007,Developing,Africa,55.7,0.5397066692337499,728
+isolation_forest,Burundi,2001,Developing,Africa,51.3,0.5569901205135583,430
+isolation_forest,Angola,2011,Developing,Africa,51.0,0.5699459133400632,52
+isolation_forest,Uganda,2002,Developing,Africa,48.8,0.6014992362899071,2717
+isolation_forest,Angola,2006,Developing,Africa,47.7,0.607015123467905,57
+isolation_forest,Uganda,2000,Developing,Africa,46.6,0.6445120242730686,2719
+isolation_forest,Belgium,2013,Developed,Europe,87.0,0.6894187006099513,242
+isolation_forest,Australia,2004,Developed,Oceania,86.0,0.6682482639103502,123
+isolation_forest,Australia,2004,Developed,Oceania,86.0,0.6682482639103502,123
+isolation_forest,Burundi,2002,Developing,Africa,51.5,0.5522128641916901,429
+isolation_forest,Angola,2010,Developing,Africa,49.6,0.5892437103290515,53
+isolation_forest,Central African Republic,2010,Developing,Africa,49.2,0.5936648943811339,517
+isolation_forest,Democratic Republic of the Congo,2007,Developing,Africa,55.7,0.5397066692337499,728
+isolation_forest,Lesotho,2000,Developing,Africa,49.3,0.5944687692357502,1487
+isolation_forest,Ivory Coast,2000,Developing,Africa,47.9,0.5991565923420222,447
+isolation_forest,Botswana,2003,Developing,Africa,46.4,0.6452941973652258,348
+isolation_forest,Lesotho,2003,Developing,Africa,45.5,0.6626870866349307,1484
+isolation_forest,Malawi,2003,Developing,Africa,44.6,0.6960100235858379,1580
+isolation_forest,Zambia,2000,Developing,Africa,43.8,0.7201292041314676,2911
+isolation_forest,Liberia,2003,Developing,Africa,50.0,0.5850134589211975,1500
+isolation_forest,Angola,2007,Developing,Africa,48.2,0.5950671215285231,56
+isolation_forest,Uganda,2000,Developing,Africa,46.6,0.6445120242730686,2719
+isolation_forest,Zimbabwe,2006,Developing,Africa,45.4,0.6649327079549097,2921
+isolation_forest,Malawi,2003,Developing,Africa,44.6,0.6960100235858379,1580
+isolation_forest,Sierra Leone,2006,Developing,Africa,44.3,0.7007350987379473,2297
+isolation_forest,Lesotho,2005,Developing,Africa,44.5,0.6964810937848038,1482
+isolation_forest,Lesotho,2004,Developing,Africa,44.8,0.6867241637429004,1483
+isolation_forest,Angola,2000,Developing,Africa,45.3,0.666190246134001,63
+isolation_forest,Botswana,2002,Developing,Africa,46.0,0.645196208979346,349
