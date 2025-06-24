@@ -24,6 +24,9 @@ from data_preprocessing import DataPreprocessor
 from model_training import LifeExpectancyModel
 from visualization import LifeExpectancyVisualizer
 from outlier_detection import OutlierDetectionSystem
+from pca_analysis import PCAAnalysis
+from pca_visualization import PCAVisualizer
+from pca_feature_selection import PCAFeatureSelector
 
 # Import sklearn modules for linear regression
 from sklearn.linear_model import LinearRegression
@@ -1089,7 +1092,7 @@ def main():
 
     page = st.sidebar.selectbox(
         "Choose a page:",
-        ["🏠 Home", "📈 Data Analysis", "🌍 Map Visualization", "🔍 Outlier Detection", "📋 Outlier Details", "🤖 Model Training", "📊 Results", "🔮 Predictions", "📋 About"]
+        ["🏠 Home", "📈 Data Analysis", "🌍 Map Visualization", "🔍 Outlier Detection", "📋 Outlier Details", "🔬 PCA Analysis", "🤖 Model Training", "📊 Results", "🔮 Predictions", "📋 About"]
     )
     
     # Load data
@@ -1514,6 +1517,366 @@ def main():
         
         # Show detailed outlier information
         show_detailed_outlier_info(df, outlier_analysis)
+    
+    # PCA Analysis page
+    elif page == "🔬 PCA Analysis":
+        st.markdown("## Principal Component Analysis (PCA)")
+        
+        # Check if cleaned data is available
+        if 'df_clean' in st.session_state:
+            df_to_use = st.session_state.df_clean
+            st.info("Using outlier-cleaned dataset for PCA analysis")
+        else:
+            df_to_use = df
+            st.info("Using original dataset for PCA analysis")
+        
+        # Initialize PCA analysis
+        pca_analyzer = PCAAnalysis()
+        pca_visualizer = PCAVisualizer()
+        pca_feature_selector = PCAFeatureSelector()
+        
+        # PCA Configuration
+        st.subheader("PCA Configuration")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            variance_threshold = st.slider(
+                "Explained Variance Threshold", 
+                min_value=0.8, 
+                max_value=0.99, 
+                value=0.95, 
+                step=0.01,
+                help="Minimum variance to be explained by selected components"
+            )
+            
+            max_components = st.number_input(
+                "Maximum Components", 
+                min_value=2, 
+                max_value=20, 
+                value=10,
+                help="Maximum number of components to consider"
+            )
+        
+        with col2:
+            top_features = st.number_input(
+                "Top Features to Display", 
+                min_value=5, 
+                max_value=20, 
+                value=10,
+                help="Number of top features to show in visualizations"
+            )
+            
+            include_target = st.checkbox(
+                "Include Target in Analysis", 
+                value=True,
+                help="Include life expectancy in PCA analysis for coloring"
+            )
+        
+        # Run PCA Analysis button
+        if st.button("🔬 Run PCA Analysis", type="primary"):
+            with st.spinner("Performing PCA analysis..."):
+                try:
+                    # Prepare data for PCA
+                    X_scaled, feature_names, target_values = pca_analyzer.prepare_data_for_pca(
+                        df_to_use, 
+                        target_column='Life expectancy'
+                    )
+                    
+                    # Perform PCA analysis
+                    pca_results = pca_analyzer.perform_pca_analysis(
+                        X_scaled, 
+                        explained_variance_threshold=variance_threshold
+                    )
+                    
+                    # Store in session state
+                    st.session_state.pca_analyzer = pca_analyzer
+                    st.session_state.pca_results = pca_results
+                    st.session_state.feature_names = feature_names
+                    st.session_state.target_values = target_values
+                    
+                    st.success("✅ PCA analysis completed successfully!")
+                    
+                except Exception as e:
+                    st.error(f"❌ Error in PCA analysis: {e}")
+                    st.info("Please check your data and try again.")
+        
+        # Display PCA results if available
+        if 'pca_results' in st.session_state:
+            pca_results = st.session_state.pca_results
+            pca_analyzer = st.session_state.pca_analyzer
+            
+            # PCA Summary
+            st.subheader("PCA Summary")
+            
+            col1, col2, col3, col4 = st.columns(4)
+            
+            with col1:
+                st.metric("Original Features", len(pca_results['feature_names']))
+            
+            with col2:
+                st.metric("Selected Components", pca_results['n_components'])
+            
+            with col3:
+                reduction_ratio = (1 - pca_results['n_components'] / len(pca_results['feature_names'])) * 100
+                st.metric("Feature Reduction", f"{reduction_ratio:.1f}%")
+            
+            with col4:
+                st.metric("Variance Explained", f"{pca_results['total_variance_explained']:.1%}")
+            
+            # Create tabs for different PCA visualizations
+            tab1, tab2, tab3, tab4, tab5 = st.tabs([
+                "📊 Scree Plot", 
+                "🔥 Loadings Heatmap", 
+                "🎯 2D Visualization", 
+                "📈 Feature Importance", 
+                "📋 Component Details"
+            ])
+            
+            with tab1:
+                st.subheader("Scree Plot - Explained Variance Analysis")
+                
+                scree_fig = pca_analyzer.create_scree_plot()
+                if scree_fig:
+                    st.plotly_chart(scree_fig, use_container_width=True)
+                    
+                    # Add interpretation
+                    st.markdown("""
+                    **Interpretation:**
+                    - **Individual Variance**: Shows how much variance each principal component explains
+                    - **Cumulative Variance**: Shows the total variance explained as components are added
+                    - **Elbow Point**: Look for the point where adding more components provides diminishing returns
+                    - **95% Threshold**: The orange dashed line shows the 95% variance threshold
+                    """)
+                else:
+                    st.error("Could not create scree plot.")
+            
+            with tab2:
+                st.subheader("Component Loadings Heatmap")
+                
+                loadings_fig = pca_analyzer.create_component_loadings_heatmap(top_features=top_features)
+                if loadings_fig:
+                    st.plotly_chart(loadings_fig, use_container_width=True)
+                    
+                    # Add interpretation
+                    st.markdown("""
+                    **Interpretation:**
+                    - **Red colors**: Positive loadings (positive correlation with the component)
+                    - **Blue colors**: Negative loadings (negative correlation with the component)
+                    - **Darker colors**: Stronger relationships
+                    - **Lighter colors**: Weaker relationships
+                    """)
+                else:
+                    st.error("Could not create loadings heatmap.")
+            
+            with tab3:
+                st.subheader("2D PCA Visualization")
+                
+                # Color options
+                color_option = st.selectbox(
+                    "Color by:",
+                    ["Life Expectancy", "Component", "None"],
+                    help="Choose how to color the data points"
+                )
+                
+                if color_option == "Life Expectancy" and include_target:
+                    target_for_plot = st.session_state.target_values
+                    color_by = 'target'
+                elif color_option == "Component":
+                    target_for_plot = None
+                    color_by = 'component'
+                else:
+                    target_for_plot = None
+                    color_by = 'none'
+                
+                pca_2d_fig = pca_analyzer.create_2d_pca_visualization(
+                    target_values=target_for_plot, 
+                    color_by=color_by
+                )
+                
+                if pca_2d_fig:
+                    st.plotly_chart(pca_2d_fig, use_container_width=True)
+                    
+                    # Add interpretation
+                    st.markdown("""
+                    **Interpretation:**
+                    - **Clusters**: Groups of points may indicate similar countries or patterns
+                    - **Outliers**: Points far from the main cluster may be unusual cases
+                    - **Trends**: If colored by life expectancy, look for patterns in the distribution
+                    - **Variance**: The percentage on each axis shows how much variance that component explains
+                    """)
+                else:
+                    st.error("Could not create 2D PCA visualization.")
+            
+            with tab4:
+                st.subheader("Feature Importance in PCA")
+                
+                importance_fig, importance_df = pca_analyzer.create_feature_importance_plot(
+                    top_features=top_features
+                )
+                
+                if importance_fig:
+                    st.plotly_chart(importance_fig, use_container_width=True)
+                    
+                    # Show importance table
+                    st.write("**Feature Importance Table:**")
+                    safe_display_dataframe(importance_df, use_container_width=True)
+                    
+                    # Add interpretation
+                    st.markdown("""
+                    **Interpretation:**
+                    - **Higher importance**: Features that contribute more to the principal components
+                    - **Lower importance**: Features that contribute less and could potentially be removed
+                    - **Feature selection**: Consider keeping features with high importance scores
+                    """)
+                else:
+                    st.error("Could not create feature importance plot.")
+            
+            with tab5:
+                st.subheader("Component Details and Interpretation")
+                
+                # Get component interpretation
+                interpretation_fig = pca_visualizer.create_component_interpretation_table(
+                    pca_analyzer, 
+                    top_features=5
+                )
+                
+                if interpretation_fig:
+                    st.plotly_chart(interpretation_fig, use_container_width=True)
+                else:
+                    st.error("Could not create component interpretation table.")
+                
+                # Variance summary
+                variance_fig = pca_visualizer.create_variance_summary_plot(pca_analyzer)
+                if variance_fig:
+                    st.plotly_chart(variance_fig, use_container_width=True)
+                
+                # Detailed component information
+                st.subheader("Detailed Component Information")
+                
+                try:
+                    for i in range(pca_results['n_components']):
+                        with st.expander(f"Component {i+1} (PC{i+1})"):
+                            # Get top contributing features for this component
+                            loadings = pca_results['loadings'][i]
+                            feature_names = pca_results['feature_names']
+                            
+                            # Sort features by absolute loading value
+                            feature_loading_pairs = list(zip(feature_names, loadings))
+                            feature_loading_pairs.sort(key=lambda x: abs(x[1]), reverse=True)
+                            
+                            # Show component statistics
+                            col1, col2 = st.columns(2)
+                            with col1:
+                                st.metric("Explained Variance", f"{pca_results['explained_variance_ratio'][i]:.3f}")
+                            with col2:
+                                st.metric("Cumulative Variance", f"{pca_results['cumulative_variance'][i]:.3f}")
+                            
+                            # Show top features in a more organized way
+                            st.write("**Top Contributing Features:**")
+                            
+                            # Create a DataFrame for better display
+                            top_features_data = []
+                            for j, (feature, loading) in enumerate(feature_loading_pairs[:top_features]):
+                                top_features_data.append({
+                                    'Rank': j + 1,
+                                    'Feature': feature,
+                                    'Loading': f"{loading:.3f}",
+                                    'Absolute Loading': f"{abs(loading):.3f}",
+                                    'Direction': "🟢 Positive" if loading > 0 else "🔴 Negative"
+                                })
+                            
+                            if top_features_data:
+                                top_features_df = pd.DataFrame(top_features_data)
+                                safe_display_dataframe(top_features_df, use_container_width=True)
+                                
+                                # Add interpretation
+                                st.markdown("""
+                                **Interpretation:**
+                                - **Positive loadings**: Features that increase with this component
+                                - **Negative loadings**: Features that decrease with this component
+                                - **Higher absolute values**: Features that contribute more to this component
+                                """)
+                            else:
+                                st.warning("No features found for this component.")
+                                
+                except Exception as e:
+                    st.error(f"Error displaying component details: {e}")
+                    st.info("Please try running the PCA analysis again.")
+            
+            # PCA Feature Selection and Model Comparison
+            st.subheader("PCA Feature Selection and Model Comparison")
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                if st.button("🔍 Compare Original vs PCA Features", type="secondary"):
+                    with st.spinner("Training models with PCA features..."):
+                        try:
+                            # Get PCA features
+                            X_pca = pca_results['X_pca']
+                            
+                            # Train models with PCA features
+                            pca_results_models, pca_model_trainer = train_models(
+                                X_pca, 
+                                st.session_state.target_values, 
+                                [f'PC{i+1}' for i in range(pca_results['n_components'])]
+                            )
+                            
+                            # Store PCA model results
+                            st.session_state.pca_results_models = pca_results_models
+                            st.session_state.pca_model_trainer = pca_model_trainer
+                            
+                            st.success("✅ PCA models trained successfully!")
+                            
+                        except Exception as e:
+                            st.error(f"❌ Error training PCA models: {e}")
+            
+            with col2:
+                if st.button("📊 Show Performance Comparison", type="secondary"):
+                    if 'pca_results_models' in st.session_state and 'results' in st.session_state:
+                        # Create comparison plot
+                        comparison_fig = pca_visualizer.create_pca_performance_comparison(
+                            st.session_state.results,
+                            st.session_state.pca_results_models
+                        )
+                        
+                        if comparison_fig:
+                            st.plotly_chart(comparison_fig, use_container_width=True)
+                            
+                            # Show comparison table
+                            st.subheader("Performance Comparison Table")
+                            
+                            comparison_data = []
+                            for model_name in st.session_state.results.keys():
+                                if model_name in st.session_state.pca_results_models:
+                                    comparison_data.append({
+                                        'Model': model_name,
+                                        'Original R²': f"{st.session_state.results[model_name]['test_r2']:.4f}",
+                                        'PCA R²': f"{st.session_state.pca_results_models[model_name]['test_r2']:.4f}",
+                                        'Original RMSE': f"{st.session_state.results[model_name]['test_rmse']:.4f}",
+                                        'PCA RMSE': f"{st.session_state.pca_results_models[model_name]['test_rmse']:.4f}",
+                                        'R² Change': f"{st.session_state.pca_results_models[model_name]['test_r2'] - st.session_state.results[model_name]['test_r2']:+.4f}",
+                                        'RMSE Change': f"{st.session_state.pca_results_models[model_name]['test_rmse'] - st.session_state.results[model_name]['test_rmse']:+.4f}"
+                                    })
+                            
+                            if comparison_data:
+                                comparison_df = pd.DataFrame(comparison_data)
+                                safe_display_dataframe(comparison_df, use_container_width=True)
+                                
+                                # Provide recommendations
+                                st.subheader("Recommendations")
+                                
+                                for row in comparison_data:
+                                    r2_change = float(row['R² Change'])
+                                    if r2_change > 0.01:
+                                        st.success(f"✅ {row['Model']}: PCA improves performance significantly")
+                                    elif r2_change > -0.01:
+                                        st.info(f"ℹ️ {row['Model']}: PCA maintains similar performance")
+                                    else:
+                                        st.warning(f"⚠️ {row['Model']}: PCA reduces performance")
+                    else:
+                        st.warning("Please train both original and PCA models first.")
     
     # Model Training page
     elif page == "🤖 Model Training":

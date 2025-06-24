@@ -24,6 +24,9 @@ from data_preprocessing import DataPreprocessor
 from model_training import LifeExpectancyModel
 from visualization import LifeExpectancyVisualizer
 from outlier_detection import OutlierDetectionSystem
+from pca_analysis import PCAAnalysis
+from pca_visualization import PCAVisualizer
+from pca_feature_selection import PCAFeatureSelector
 
 # Import modul sklearn untuk regresi linear
 from sklearn.linear_model import LinearRegression
@@ -1088,7 +1091,7 @@ def main():
     
     page = st.sidebar.selectbox(
         "Pilih halaman:",
-        ["🏠 Beranda", "📈 Analisis Data", "🌍 Visualisasi Peta", "🔍 Deteksi Outlier", "📋 Detail Outlier", "🤖 Pelatihan Model", "📊 Hasil", "🔮 Prediksi", "📋 Tentang"]
+        ["🏠 Beranda", "📈 Analisis Data", "🌍 Visualisasi Peta", "🔍 Deteksi Outlier", "📋 Detail Outlier", "🔬 Analisis PCA", "🤖 Pelatihan Model", "📊 Hasil", "🔮 Prediksi", "📋 Tentang"]
     )
     
     # Muat data
@@ -1113,6 +1116,7 @@ def main():
             ### Fitur:
             - **Preprocessing Data**: Menangani nilai yang hilang, pembersihan data, dan rekayasa fitur
             - **Deteksi Outlier Komprehensif**: Berbagai metode deteksi dengan analisis detail
+            - **Analisis Komponen Utama (PCA)**: Reduksi dimensi, seleksi fitur, dan visualisasi komponen
             - **Model Beragam**: Regresi Linear, Ridge, Lasso, Elastic Net, Random Forest, Gradient Boosting
             - **Evaluasi Model**: Validasi silang, tuning hyperparameter, dan metrik performa
             - **Visualisasi Lanjutan**: Plot interaktif dan analisis komprehensif
@@ -1508,6 +1512,366 @@ def main():
         else:
             st.warning("⚠️ Jalankan deteksi outlier terlebih dahulu di halaman 'Deteksi Outlier'.")
     
+    # Analisis PCA
+    elif page == "🔬 Analisis PCA":
+        st.markdown("## Analisis Komponen Utama (PCA)")
+        
+        # Periksa apakah data yang sudah dibersihkan tersedia
+        if 'df_clean' in st.session_state:
+            df_to_use = st.session_state.df_clean
+            st.info("Menggunakan dataset yang sudah dibersihkan dari outlier untuk analisis PCA")
+        else:
+            df_to_use = df
+            st.info("Menggunakan dataset asli untuk analisis PCA")
+        
+        # Inisialisasi analisis PCA
+        pca_analyzer = PCAAnalysis()
+        pca_visualizer = PCAVisualizer()
+        pca_feature_selector = PCAFeatureSelector()
+        
+        # Konfigurasi PCA
+        st.subheader("Konfigurasi PCA")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            variance_threshold = st.slider(
+                "Ambang Batas Varians yang Dijelaskan", 
+                min_value=0.8, 
+                max_value=0.99, 
+                value=0.95, 
+                step=0.01,
+                help="Varians minimum yang akan dijelaskan oleh komponen yang dipilih"
+            )
+            
+            max_components = st.number_input(
+                "Komponen Maksimum", 
+                min_value=2, 
+                max_value=20, 
+                value=10,
+                help="Jumlah maksimum komponen yang akan dipertimbangkan"
+            )
+        
+        with col2:
+            top_features = st.number_input(
+                "Fitur Teratas untuk Ditampilkan", 
+                min_value=5, 
+                max_value=20, 
+                value=10,
+                help="Jumlah fitur teratas yang akan ditampilkan dalam visualisasi"
+            )
+            
+            include_target = st.checkbox(
+                "Sertakan Target dalam Analisis", 
+                value=True,
+                help="Sertakan harapan hidup dalam analisis PCA untuk pewarnaan"
+            )
+        
+        # Tombol Jalankan Analisis PCA
+        if st.button("🔬 Jalankan Analisis PCA", type="primary"):
+            with st.spinner("Melakukan analisis PCA..."):
+                try:
+                    # Siapkan data untuk PCA
+                    X_scaled, feature_names, target_values = pca_analyzer.prepare_data_for_pca(
+                        df_to_use, 
+                        target_column='Life expectancy'
+                    )
+                    
+                    # Lakukan analisis PCA
+                    pca_results = pca_analyzer.perform_pca_analysis(
+                        X_scaled, 
+                        explained_variance_threshold=variance_threshold
+                    )
+                    
+                    # Simpan di session state
+                    st.session_state.pca_analyzer = pca_analyzer
+                    st.session_state.pca_results = pca_results
+                    st.session_state.feature_names = feature_names
+                    st.session_state.target_values = target_values
+                    
+                    st.success("✅ Analisis PCA berhasil diselesaikan!")
+                    
+                except Exception as e:
+                    st.error(f"❌ Error dalam analisis PCA: {e}")
+                    st.info("Silakan periksa data Anda dan coba lagi.")
+        
+        # Tampilkan hasil PCA jika tersedia
+        if 'pca_results' in st.session_state:
+            pca_results = st.session_state.pca_results
+            pca_analyzer = st.session_state.pca_analyzer
+            
+            # Ringkasan PCA
+            st.subheader("Ringkasan PCA")
+            
+            col1, col2, col3, col4 = st.columns(4)
+            
+            with col1:
+                st.metric("Fitur Asli", len(pca_results['feature_names']))
+            
+            with col2:
+                st.metric("Komponen Terpilih", pca_results['n_components'])
+            
+            with col3:
+                reduction_ratio = (1 - pca_results['n_components'] / len(pca_results['feature_names'])) * 100
+                st.metric("Pengurangan Fitur", f"{reduction_ratio:.1f}%")
+            
+            with col4:
+                st.metric("Varians Dijelaskan", f"{pca_results['total_variance_explained']:.1%}")
+            
+            # Buat tab untuk berbagai visualisasi PCA
+            tab1, tab2, tab3, tab4, tab5 = st.tabs([
+                "📊 Scree Plot", 
+                "🔥 Heatmap Loadings", 
+                "🎯 Visualisasi 2D", 
+                "📈 Pentingnya Fitur", 
+                "📋 Detail Komponen"
+            ])
+            
+            with tab1:
+                st.subheader("Scree Plot - Analisis Varians yang Dijelaskan")
+                
+                scree_fig = pca_analyzer.create_scree_plot()
+                if scree_fig:
+                    st.plotly_chart(scree_fig, use_container_width=True)
+                    
+                    # Tambahkan interpretasi
+                    st.markdown("""
+                    **Interpretasi:**
+                    - **Varians Individual**: Menunjukkan berapa banyak varians yang dijelaskan oleh setiap komponen utama
+                    - **Varians Kumulatif**: Menunjukkan total varians yang dijelaskan saat komponen ditambahkan
+                    - **Titik Siku**: Cari titik di mana menambahkan komponen lebih lanjut memberikan hasil yang menurun
+                    - **Ambang Batas 95%**: Garis putus-putus oranye menunjukkan ambang batas varians 95%
+                    """)
+                else:
+                    st.error("Tidak dapat membuat scree plot.")
+            
+            with tab2:
+                st.subheader("Heatmap Loadings Komponen")
+                
+                loadings_fig = pca_analyzer.create_component_loadings_heatmap(top_features=top_features)
+                if loadings_fig:
+                    st.plotly_chart(loadings_fig, use_container_width=True)
+                    
+                    # Tambahkan interpretasi
+                    st.markdown("""
+                    **Interpretasi:**
+                    - **Warna merah**: Loadings positif (korelasi positif dengan komponen)
+                    - **Warna biru**: Loadings negatif (korelasi negatif dengan komponen)
+                    - **Warna lebih gelap**: Hubungan yang lebih kuat
+                    - **Warna lebih terang**: Hubungan yang lebih lemah
+                    """)
+                else:
+                    st.error("Tidak dapat membuat heatmap loadings.")
+            
+            with tab3:
+                st.subheader("Visualisasi PCA 2D")
+                
+                # Opsi warna
+                color_option = st.selectbox(
+                    "Warna berdasarkan:",
+                    ["Harapan Hidup", "Komponen", "Tidak Ada"],
+                    help="Pilih cara mewarnai titik data"
+                )
+                
+                if color_option == "Harapan Hidup" and include_target:
+                    target_for_plot = st.session_state.target_values
+                    color_by = 'target'
+                elif color_option == "Komponen":
+                    target_for_plot = None
+                    color_by = 'component'
+                else:
+                    target_for_plot = None
+                    color_by = 'none'
+                
+                pca_2d_fig = pca_analyzer.create_2d_pca_visualization(
+                    target_values=target_for_plot, 
+                    color_by=color_by
+                )
+                
+                if pca_2d_fig:
+                    st.plotly_chart(pca_2d_fig, use_container_width=True)
+                    
+                    # Tambahkan interpretasi
+                    st.markdown("""
+                    **Interpretasi:**
+                    - **Cluster**: Kelompok titik mungkin menunjukkan negara atau pola yang serupa
+                    - **Outlier**: Titik yang jauh dari cluster utama mungkin merupakan kasus yang tidak biasa
+                    - **Tren**: Jika diberi warna berdasarkan harapan hidup, cari pola dalam distribusi
+                    - **Varians**: Persentase pada setiap sumbu menunjukkan berapa banyak varians yang dijelaskan komponen tersebut
+                    """)
+                else:
+                    st.error("Tidak dapat membuat visualisasi PCA 2D.")
+            
+            with tab4:
+                st.subheader("Pentingnya Fitur dalam PCA")
+                
+                importance_fig, importance_df = pca_analyzer.create_feature_importance_plot(
+                    top_features=top_features
+                )
+                
+                if importance_fig:
+                    st.plotly_chart(importance_fig, use_container_width=True)
+                    
+                    # Tampilkan tabel pentingnya
+                    st.write("**Tabel Pentingnya Fitur:**")
+                    safe_display_dataframe(importance_df, use_container_width=True)
+                    
+                    # Tambahkan interpretasi
+                    st.markdown("""
+                    **Interpretasi:**
+                    - **Pentingnya lebih tinggi**: Fitur yang berkontribusi lebih banyak pada komponen utama
+                    - **Pentingnya lebih rendah**: Fitur yang berkontribusi lebih sedikit dan berpotensi dapat dihapus
+                    - **Seleksi fitur**: Pertimbangkan untuk mempertahankan fitur dengan skor penting yang tinggi
+                    """)
+                else:
+                    st.error("Tidak dapat membuat plot pentingnya fitur.")
+            
+            with tab5:
+                st.subheader("Detail Komponen dan Interpretasi")
+                
+                # Dapatkan interpretasi komponen
+                interpretation_fig = pca_visualizer.create_component_interpretation_table(
+                    pca_analyzer, 
+                    top_features=5
+                )
+                
+                if interpretation_fig:
+                    st.plotly_chart(interpretation_fig, use_container_width=True)
+                else:
+                    st.error("Tidak dapat membuat tabel interpretasi komponen.")
+                
+                # Ringkasan varians
+                variance_fig = pca_visualizer.create_variance_summary_plot(pca_analyzer)
+                if variance_fig:
+                    st.plotly_chart(variance_fig, use_container_width=True)
+                
+                # Informasi komponen detail
+                st.subheader("Informasi Komponen Detail")
+                
+                try:
+                    for i in range(pca_results['n_components']):
+                        with st.expander(f"Komponen {i+1} (PC{i+1})"):
+                            # Dapatkan fitur yang berkontribusi teratas untuk komponen ini
+                            loadings = pca_results['loadings'][i]
+                            feature_names = pca_results['feature_names']
+                            
+                            # Urutkan fitur berdasarkan nilai loading absolut
+                            feature_loading_pairs = list(zip(feature_names, loadings))
+                            feature_loading_pairs.sort(key=lambda x: abs(x[1]), reverse=True)
+                            
+                            # Tampilkan statistik komponen
+                            col1, col2 = st.columns(2)
+                            with col1:
+                                st.metric("Varians Dijelaskan", f"{pca_results['explained_variance_ratio'][i]:.3f}")
+                            with col2:
+                                st.metric("Varians Kumulatif", f"{pca_results['cumulative_variance'][i]:.3f}")
+                            
+                            # Tampilkan fitur teratas dengan cara yang lebih terorganisir
+                            st.write("**Fitur yang Berkontribusi Teratas:**")
+                            
+                            # Buat DataFrame untuk tampilan yang lebih baik
+                            top_features_data = []
+                            for j, (feature, loading) in enumerate(feature_loading_pairs[:top_features]):
+                                top_features_data.append({
+                                    'Peringkat': j + 1,
+                                    'Fitur': feature,
+                                    'Loading': f"{loading:.3f}",
+                                    'Loading Absolut': f"{abs(loading):.3f}",
+                                    'Arah': "🟢 Positif" if loading > 0 else "🔴 Negatif"
+                                })
+                            
+                            if top_features_data:
+                                top_features_df = pd.DataFrame(top_features_data)
+                                safe_display_dataframe(top_features_df, use_container_width=True)
+                                
+                                # Tambahkan interpretasi
+                                st.markdown("""
+                                **Interpretasi:**
+                                - **Loadings positif**: Fitur yang meningkat dengan komponen ini
+                                - **Loadings negatif**: Fitur yang menurun dengan komponen ini
+                                - **Nilai absolut lebih tinggi**: Fitur yang berkontribusi lebih banyak pada komponen ini
+                                """)
+                            else:
+                                st.warning("Tidak ada fitur ditemukan untuk komponen ini.")
+                                
+                except Exception as e:
+                    st.error(f"Error menampilkan detail komponen: {e}")
+                    st.info("Silakan coba jalankan analisis PCA lagi.")
+            
+            # Seleksi Fitur PCA dan Perbandingan Model
+            st.subheader("Seleksi Fitur PCA dan Perbandingan Model")
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                if st.button("🔍 Bandingkan Fitur Asli vs PCA", type="secondary"):
+                    with st.spinner("Melatih model dengan fitur PCA..."):
+                        try:
+                            # Dapatkan fitur PCA
+                            X_pca = pca_results['X_pca']
+                            
+                            # Latih model dengan fitur PCA
+                            pca_results_models, pca_model_trainer = train_models(
+                                X_pca, 
+                                st.session_state.target_values, 
+                                [f'PC{i+1}' for i in range(pca_results['n_components'])]
+                            )
+                            
+                            # Simpan hasil model PCA
+                            st.session_state.pca_results_models = pca_results_models
+                            st.session_state.pca_model_trainer = pca_model_trainer
+                            
+                            st.success("✅ Model PCA berhasil dilatih!")
+                            
+                        except Exception as e:
+                            st.error(f"❌ Error melatih model PCA: {e}")
+            
+            with col2:
+                if st.button("📊 Tampilkan Perbandingan Performa", type="secondary"):
+                    if 'pca_results_models' in st.session_state and 'results' in st.session_state:
+                        # Buat plot perbandingan
+                        comparison_fig = pca_visualizer.create_pca_performance_comparison(
+                            st.session_state.results,
+                            st.session_state.pca_results_models
+                        )
+                        
+                        if comparison_fig:
+                            st.plotly_chart(comparison_fig, use_container_width=True)
+                            
+                            # Tampilkan tabel perbandingan
+                            st.subheader("Tabel Perbandingan Performa")
+                            
+                            comparison_data = []
+                            for model_name in st.session_state.results.keys():
+                                if model_name in st.session_state.pca_results_models:
+                                    comparison_data.append({
+                                        'Model': model_name,
+                                        'R² Asli': f"{st.session_state.results[model_name]['test_r2']:.4f}",
+                                        'R² PCA': f"{st.session_state.pca_results_models[model_name]['test_r2']:.4f}",
+                                        'RMSE Asli': f"{st.session_state.results[model_name]['test_rmse']:.4f}",
+                                        'RMSE PCA': f"{st.session_state.pca_results_models[model_name]['test_rmse']:.4f}",
+                                        'Perubahan R²': f"{st.session_state.pca_results_models[model_name]['test_r2'] - st.session_state.results[model_name]['test_r2']:+.4f}",
+                                        'Perubahan RMSE': f"{st.session_state.pca_results_models[model_name]['test_rmse'] - st.session_state.results[model_name]['test_rmse']:+.4f}"
+                                    })
+                            
+                            if comparison_data:
+                                comparison_df = pd.DataFrame(comparison_data)
+                                safe_display_dataframe(comparison_df, use_container_width=True)
+                                
+                                # Berikan rekomendasi
+                                st.subheader("Rekomendasi")
+                                
+                                for row in comparison_data:
+                                    r2_change = float(row['Perubahan R²'])
+                                    if r2_change > 0.01:
+                                        st.success(f"✅ {row['Model']}: PCA meningkatkan performa secara signifikan")
+                                    elif r2_change > -0.01:
+                                        st.info(f"ℹ️ {row['Model']}: PCA mempertahankan performa yang serupa")
+                                    else:
+                                        st.warning(f"⚠️ {row['Model']}: PCA mengurangi performa")
+                    else:
+                        st.warning("Silakan latih model asli dan PCA terlebih dahulu.")
+    
     # Pelatihan model
     elif page == "🤖 Pelatihan Model":
         st.markdown("## Pelatihan Model")
@@ -1875,19 +2239,27 @@ def main():
         - **Visualisasi**: Plot komprehensif menunjukkan distribusi outlier dan dampak
         - **Informasi Detail**: Tampilkan data yang dikenali sebagai outlier
         
-        #### 3. Pelatihan Model
+        #### 3. Analisis Komponen Utama (PCA)
+        - **Reduksi Dimensi**: Mengurangi jumlah fitur sambil mempertahankan varians yang signifikan
+        - **Analisis Varians**: Scree plot untuk menentukan jumlah komponen optimal
+        - **Visualisasi Komponen**: Heatmap loadings dan plot 2D untuk interpretasi
+        - **Seleksi Fitur**: Identifikasi fitur yang paling berkontribusi pada komponen utama
+        - **Perbandingan Model**: Bandingkan performa model dengan fitur asli vs fitur PCA
+        - **Interpretasi Komponen**: Analisis detail setiap komponen utama dan maknanya
+        
+        #### 4. Pelatihan Model
         - **Berbagai Algoritma**: Regresi Linear, Ridge, Lasso, Elastic Net, Random Forest, Gradient Boosting
         - **Validasi Silang**: 5-fold cross-validation untuk evaluasi yang robust
         - **Tuning Hyperparameter**: Grid search untuk parameter optimal
         - **Perbandingan Performa**: Evaluasi model side-by-side
         
-        #### 4. Evaluasi Model
+        #### 5. Evaluasi Model
         - **Metrik Performa**: R², RMSE, MAE
         - **Perbandingan Model**: Analisis performa side-by-side
         - **Pentingnya Fitur**: Identifikasi prediktor kunci
         - **Analisis Residual**: Periksa asumsi model
         
-        #### 5. Visualisasi
+        #### 6. Visualisasi
         - **Distribusi Data**: Histogram dan box plot
         - **Analisis Korelasi**: Heatmap dan scatter plot
         - **Analisis Outlier**: Visualisasi deteksi outlier komprehensif
@@ -1934,9 +2306,10 @@ def main():
         1. **Analisis Data**: Jelajahi dataset, periksa distribusi dan korelasi
         2. **Deteksi Outlier**: Gunakan deteksi outlier komprehensif dengan berbagai metode
         3. **Detail Outlier**: Lihat informasi detail tentang outlier yang terdeteksi
-        4. **Pelatihan Model**: Konfigurasi opsi preprocessing dan latih model
-        5. **Hasil**: Lihat performa model dan pentingnya fitur
-        6. **Prediksi**: Buat prediksi pada data baru (interface yang disederhanakan)
+        4. **Analisis PCA**: Lakukan analisis komponen utama untuk reduksi dimensi dan seleksi fitur
+        5. **Pelatihan Model**: Konfigurasi opsi preprocessing dan latih model
+        6. **Hasil**: Lihat performa model dan pentingnya fitur
+        7. **Prediksi**: Buat prediksi pada data baru (interface yang disederhanakan)
         
         ### Teknologi yang Digunakan
         - **Python**: Bahasa pemrograman utama
